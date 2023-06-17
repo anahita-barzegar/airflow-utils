@@ -3,10 +3,10 @@ from datetime import datetime, timedelta
 from airflow import DAG
 import datetime
 
-task_schedules = {
-    'task1': ['*/2 * * * *', 1, 2],
-    'task2': ['0 * * * *', 3, 4],
-    'task3': ['*/5 * * * *', 5, 6]
+task_schedule_input = {
+    'task1': {'schedule': '*/2 * * * *', 'first_input': 1, 'second_input': 2},
+    'task2': {'schedule':'0 * * * *', 'first_input': 3, 'second_input':  4},
+    'task3': {'schedule':'*/5 * * * *', 'first_input': 5, 'second_input': 6}
 }
 
 default_args = {
@@ -44,19 +44,18 @@ def create_dag(dag_id, schedule, task_array, default_args, op_args):
     return dag
 
 
-# build a dag for each number in range(10)
-for task_name, item in task_schedules.items():
+for task_name, item in task_schedule_input.items():
     dag_id = "counter_{}".format(str(task_name))
 
     default_args = {"owner": "admin", "start_date": datetime.datetime(2021, 1, 1), "catchup": False}
 
-    schedule = item[0]
+    schedule = item['schedule']
 
     task_array = []
     op_args = []
 
     for q in ['a', 'b', 'c', 'd']:
-        op_arg = {'start': item[1], 'end': item[2]}
+        op_arg = {'start': item['first_input'], 'end': item['second_input']}
         task_array.append(f'counter_{q}')
         op_args.append(op_arg)
         print(op_arg)
