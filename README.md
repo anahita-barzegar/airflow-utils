@@ -1,4 +1,4 @@
-# airflow
+# dynamic dags and tasks example
 
 1. We import necessary dependencies from the Airflow library and datetime module.
 2. The `task_schedules` dictionary defines the schedules and parameters for each task.
