@@ -33,7 +33,8 @@ def create_dynamic_tasks(task_ids, op_args):
 
 
 def create_dag(dag_id, schedule, task_array, default_args, op_args):
-    dag = DAG(dag_id, schedule_interval=schedule, default_args=default_args)
+    dag = DAG(dag_id, schedule_interval=schedule, start_date=datetime.datetime.now(),
+    catchup=False, default_args=default_args)
     with dag:
         tasks = create_dynamic_tasks(task_array, op_args)
         for task in tasks:
