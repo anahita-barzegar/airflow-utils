@@ -7,3 +7,5 @@
 5. The `create_dynamic_tasks` function creates PythonOperator tasks based on the task IDs and corresponding parameters.
 6. The `create_dag` function generates a dynamic DAG by assembling the tasks and setting the schedule interval.
 7. Finally, we loop through the task schedules, create individual DAGs, and execute the data pipeline.
+
+code explaination: https://medium.com/@anahita.barzegar94/building-dynamic-data-pipelines-with-apache-airflow-6c5b847c524c
